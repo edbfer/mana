@@ -45,6 +45,6 @@ public:
     }
   }
 
-}
+};
 
 #endif //_PATH_H
