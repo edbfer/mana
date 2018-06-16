@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <string>
 #include <sstream>
+#include <cmath>
 
 using namespace std;
 
@@ -14,38 +15,51 @@ class Population {
 private:
 
   int dim;
-  Path* pop;
+  Path** pop;
 
 public:
   Population(int dim = 50): dim(dim)
   {
-    pop = new Path[dim];
+    pop = new Path*[dim];
   }
 
   ~Population()
   {
+    for(int i = 0; i<dim; i++)
+    {
+      delete pop[i];
+    }
     delete[] pop;
   }
 
-  generate(Point i, Point f, int pathsize)
+  void generate(Point ini, Point f, int pathsize)
   {
     for(int i = 0; i<dim; i++)
     {
-      double length = sqrt(pow(i.x-f.x, 2) + pow(i.y-f.y, 2));
-      Path p(i, f, pathsize);
+      double length = sqrt(pow(ini.x-f.x, 2.0) + pow(ini.y-f.y, 2.0));
+      Path *p = new Path(ini, f, pathsize);
       for(int j = 1; j<pathsize-1; j++)
       {
-        double x = (rand()/RAND_MAX)*length;
-        double y = (rand()/RAND_MAX)*length;
+        double x = (((double)rand())/((double)RAND_MAX))*length;
+        double y = (((double)rand())/((double)RAND_MAX))*length;
         Point t(x, y);
-        p.path[j] = t;
+        (*p)[j] = t;
       }
+      pop[i] = p;
     }
   }
 
-  printall()
+  void printall()
   {
+    ostringstream fnstream;
     for(int i = 0; i<dim; i++)
+    {
+      fnstream << "teste_" << i << ".dat";
+      ofstream out(fnstream.str().c_str());
+      pop[i]->print(out);
+      fnstream.str("");
+      out.close();
+    }
   }
 };
 

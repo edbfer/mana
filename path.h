@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 
+using namespace std;
+
 #include "util.h"
 
 class Path{
@@ -31,7 +33,7 @@ public:
     delete[] path;
   }
 
-  double getFitness(double (fitfunction*) (Path&))
+  double getFitness(double (*fitfunction) (Path&))
   {
     this->fitness = fitfunction(*this);
     return fitness;
@@ -41,8 +43,13 @@ public:
   {
     for(int i = 0; i<N; i++)
     {
-      out << path[i].x << "\t" << path[i].y << "\n";
+      out << path[i].x << "\t" << path[i].y << endl;
     }
+  }
+
+  Point& operator[](const int index)
+  {
+    return path[index];
   }
 
 };
