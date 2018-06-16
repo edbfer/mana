@@ -32,9 +32,9 @@ public:
     delete[] pop;
   }
 
-  Path& operator[](const int index)
+  Path*& operator[](const int index)
   {
-    return *pop[i];
+    return pop[i];
   }
 
   void generate(Point ini, Point f, int pathsize)
