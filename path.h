@@ -28,6 +28,13 @@ public:
     path[N-1] = f;
   }
 
+  Path (const Path& p)
+  {
+    N = p.N;
+    fitness = p.fitness;
+    path = p.path;
+  }
+
   ~Path()
   {
     delete[] path;
