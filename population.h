@@ -32,6 +32,11 @@ public:
     delete[] pop;
   }
 
+  Path& operator[](const int index)
+  {
+    return *pop[i];
+  }
+
   void generate(Point ini, Point f, int pathsize)
   {
     for(int i = 0; i<dim; i++)
