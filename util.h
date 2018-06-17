@@ -15,7 +15,13 @@ struct Point
   Point(const Point& p): x(p.x), y(p.y)
   {}
 
-  
+  friend Point operator* (double c, const Point& p)
+  {
+    Point newP(c*p.x, c*p.y);
+    return newP;
+  }
+
+
 };
 
 #endif //_UTIL_H

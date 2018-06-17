@@ -22,10 +22,11 @@ public:
   ~Population();
 
   Path*& operator[](const int index);
+  int getDimension();
 
   void generate(Point ini, Point f, int pathsize);
   void printall();
-  
+
 };
 
 #endif //_POPULATION_H
