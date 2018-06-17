@@ -54,21 +54,24 @@ double deviation(Population pop)
   s = sum/(dim-1);
   return s;
 }
-double gaussian(Path path, Population pop)
+double gaussian(Path path, double s)
 {
-  double f=0, s=0;
-  s = deviation(pop);
+  double f=0;
   f = (1/(s*sqrt(2.*M_PI)))*exp(-0.5*pow((path.fitness - max_fitness)/s,2));
   return f;
 }
 
 Population iteration(Population pop, int N_combined, double dx)//N_combined= numero de caminhos com menor ação que vão ser combinados
 {
-  bubble_sort(pop);
   int N=0, k=0, i=0;
-  double variation;
+  double variation=0., s=0.;
+
+  bubble_sort(pop);
+  s = deviation(pop);
   dim = getDimension();
+
   Population new_pop(dim);
+
   if(N_combined>dim)
     N_combined=dim;
 
@@ -82,7 +85,7 @@ Population iteration(Population pop, int N_combined, double dx)//N_combined= num
           variation = (((double)rand())/((double)RAND_MAX))*2*dx-dx;
 
           for(int j=0; j<N; j++)
-            new_pop[i][j] = gaussian(pop[k][j],pop)*pop[k][j] + gaussian(pop[h][j],pop)*pop[h][j] + variation;
+            new_pop[i][j] = gaussian(pop[k][j],s)*pop[k][j] + gaussian(pop[h][j],s)*pop[h][j] + variation;
 
           if(i<dim)
             i++;
@@ -94,9 +97,6 @@ Population iteration(Population pop, int N_combined, double dx)//N_combined= num
 
   return new_pop;
 }
-
-
-
 
 };
 
