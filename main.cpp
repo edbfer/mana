@@ -30,7 +30,6 @@ int main(){
     fflush(gnupipe);
     sleep(1000);
   }
-
   fclose(gnupipe);
 
   return 0;

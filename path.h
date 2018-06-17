@@ -12,10 +12,13 @@ class Path{
 private:
 
   Point* path;
-  int N;
-  double fitness;
+
+
 
 public:
+  double fitness;
+  int N;
+  //amanha faço funçoes para isto
   Path(int N = 200): N(N)
   {
     path = new Point[N];
