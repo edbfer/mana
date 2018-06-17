@@ -65,31 +65,33 @@ double gaussian(Path path, Population pop)
 Population iteration(Population pop, int N_combined, double dx)//N_combined= numero de caminhos com menor ação que vão ser combinados
 {
   bubble_sort(pop);
-  int N=0, cont=0, k=0;
+  int N=0, k=0, i=0;
   double variation;
   dim = getDimension();
   Population new_pop(dim);
+  if(N_combined>dim)
+    N_combined=dim;
 
-
-    while(cont < dim)
+    while(1)
     {
       for(k=0; k<N_combined; k++)
       {
         for(int h=(k+1); h<(N_combined-1); h++)
-          {
-            for(int i=0; i<dim; i++)
-            {
-              N = pop[i]->N;
-              variation = (((double)rand())/((double)RAND_MAX))*2*dx-dx;
-              for(int j=0; j<N; j++)
-              {
-                new_pop[i][j] = gaussian(pop[k][j],pop)*pop[k][j] + gaussian(pop[h][j],pop)*pop[h][j] + variation;
-                cont+=cont;
-              }
-            }
+        {
+          N = pop[i]->N;
+          variation = (((double)rand())/((double)RAND_MAX))*2*dx-dx;
+
+          for(int j=0; j<N; j++)
+            new_pop[i][j] = gaussian(pop[k][j],pop)*pop[k][j] + gaussian(pop[h][j],pop)*pop[h][j] + variation;
+
+          if(i<dim)
+            i++;
+          else
+            break;
           }
         }
       }
+
   return new_pop;
 }
 
