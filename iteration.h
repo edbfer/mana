@@ -3,6 +3,7 @@
 
 #include "path.h"
 #include "population.h"
+#include "util.h"
 
 #include <cmath>
 
@@ -64,11 +65,11 @@ double gaussian(Path path, double s)
 Population iteration(Population pop, int N_combined, double dx)//N_combined= numero de caminhos com menor ação que vão ser combinados
 {
   int N=0, k=0, i=0;
-  double variation=0., s=0.;
+  double s=0.;
 
   bubble_sort(pop);
   s = deviation(pop);
-  dim = getDimension();
+  dim = pop.getDimension();
 
   Population new_pop(dim);
 
@@ -82,10 +83,10 @@ Population iteration(Population pop, int N_combined, double dx)//N_combined= num
         for(int h=(k+1); h<(N_combined-1); h++)
         {
           N = pop[i]->N;
-          variation = (((double)rand())/((double)RAND_MAX))*2*dx-dx;
+          Point variation((((double)rand())/((double)RAND_MAX))*2*dx-dx,(((double)rand())/((double)RAND_MAX))*2*dx-dx);
 
           for(int j=0; j<N; j++)
-            new_pop[i][j] = gaussian(pop[k][j],s)*pop[k][j] + gaussian(pop[h][j],s)*pop[h][j] + variation;
+            (*new_pop[i])[j] = gaussian((*pop[k]),s)*(*pop[k])[j] + gaussian((*pop[h]),s)*(*pop[h])[j] + variation;
 
           if(i<dim)
             i++;
