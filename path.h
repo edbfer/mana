@@ -10,10 +10,7 @@ using namespace std;
 
 class Path{
 private:
-
   Point* path;
-
-
 
 public:
   double fitness;

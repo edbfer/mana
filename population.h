@@ -9,6 +9,9 @@
 #include <sstream>
 #include <cmath>
 
+//Boost?
+#include <boost/filesystem.hpp>
+
 using namespace std;
 
 class Population {
@@ -16,6 +19,7 @@ private:
 
   int dim;
   Path** pop;
+  int id;
 
 public:
   Population(int dim);
@@ -26,6 +30,8 @@ public:
 
   void generate(Point ini, Point f, int pathsize);
   void printall();
+
+  void setId(int id);
 
 };
 

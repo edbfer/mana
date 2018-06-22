@@ -1,6 +1,9 @@
 #include "population.h"
 #include <omp.h>
 #include <cmath>
+#include <cstdlib>
+
+using namespace std;
 
 Population::Population(int dim = 50): dim(dim)
 {
@@ -92,12 +95,20 @@ Path*& Population::operator[](const int index)
 void Population::printall()
 {
   ostringstream fnstream;
+  ostringstream dirs;
+  dirs << "mkdir ./iteration" << id;
+  system(dirs.str().c_str());
   for(int i = 0; i<dim; i++)
   {
-    fnstream << "teste_" << i << ".dat";
+    fnstream << dirs << "/teste_" << i << ".dat";
     ofstream out(fnstream.str().c_str());
     pop[i]->print(out);
     fnstream.str("");
     out.close();
   }
+}
+
+void Population::setId(int id)
+{
+  this->id = id;
 }

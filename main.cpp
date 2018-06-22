@@ -16,15 +16,28 @@ using namespace std;
 
 int main(){
 
+  int nmax;
+  double dh = 0.05;
+
   srand(time(nullptr));
-  Population p(50);
+  Population pini(50);
   Point ini(0.0, 0.0);
   Point f(10.0, 10.0);
 
-  p.generate(ini, f, 1500);
-  p.printall();
+  pini.generate(ini, f, 1500);
+  pini.printall();
 
-  
+  Population *p0 = &pini;
+
+  Iteration i = new Iteration();
+
+  for(int i = 0; i<nmax; i++)
+  {
+    Population *nextp = i.iterate(p0, 3, 0.05);
+    nextp->setId(i);
+    nextp->printall();
+    p0 = nextp;
+  }
 
   return 0;
 
