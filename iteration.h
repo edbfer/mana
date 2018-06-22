@@ -62,6 +62,7 @@ double gaussian(Path path, double s)
   return f;
 }
 
+
 Population iteration(Population pop, int N_combined, double dx)//N_combined= numero de caminhos com menor ação que vão ser combinados
 {
   int N=0, k=0, i=0;
@@ -76,7 +77,7 @@ Population iteration(Population pop, int N_combined, double dx)//N_combined= num
   if(N_combined>dim)
     N_combined=dim;
 
-    while(1)
+      while(1)
     {
       for(k=0; k<N_combined; k++)
       {
@@ -86,7 +87,7 @@ Population iteration(Population pop, int N_combined, double dx)//N_combined= num
           Point variation((((double)rand())/((double)RAND_MAX))*2*dx-dx,(((double)rand())/((double)RAND_MAX))*2*dx-dx);
 
           for(int j=0; j<N; j++)
-            (*new_pop[i])[j] = gaussian((*pop[k]),s)*(*pop[k])[j] + gaussian((*pop[h]),s)*(*pop[h])[j] + variation;
+            (*new_pop[i])[j].y = gaussian((*pop[k]),s)*(*pop[k])[j] + gaussian((*pop[h]),s)*(*pop[h])[j] + variation;
 
           if(i<dim)
             i++;
@@ -98,6 +99,7 @@ Population iteration(Population pop, int N_combined, double dx)//N_combined= num
 
   return new_pop;
 }
+
 
 };
 
