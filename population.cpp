@@ -96,11 +96,11 @@ void Population::printall()
 {
   ostringstream fnstream;
   ostringstream dirs;
-  dirs << "mkdir ./iteration" << id;
+  dirs << "mkdir ./iteration_" << id;
   system(dirs.str().c_str());
   for(int i = 0; i<dim; i++)
   {
-    fnstream << dirs << "/teste_" << i << ".dat";
+    fnstream << "iteration_" << id << "/teste_" << i << ".dat";
     ofstream out(fnstream.str().c_str());
     pop[i]->print(out);
     fnstream.str("");

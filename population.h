@@ -9,8 +9,7 @@
 #include <sstream>
 #include <cmath>
 
-//Boost?
-#include <boost/filesystem.hpp>
+//Boos
 
 using namespace std;
 

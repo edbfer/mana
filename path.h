@@ -8,57 +8,27 @@ using namespace std;
 
 #include "util.h"
 
-class Path{
+class Path
+{
 private:
   Point* path;
-
 public:
   double fitness;
   int N;
   //amanha faço funçoes para isto
-  Path(int N = 200): N(N)
-  {
-    path = new Point[N];
-  }
+  Path(int N);
 
-  Path(Point i, Point f, int N = 200): N(N)
-  {
-    path = new Point[N];
-    path[0] = i;
-    path[N-1] = f;
-  }
+  Path(Point i, Point f, int N);
 
-  Path (const Path& p)
-  {
-    N = p.N;
-    fitness = p.fitness;
-    path = p.path;
-  }
+  Path (const Path& p);
 
-  ~Path()
-  {
-    delete[] path;
-  }
+  ~Path();
 
-  double getFitness(double (*fitfunction) (Path&))
-  {
-    this->fitness = fitfunction(*this);
-    return fitness;
-  }
+  double getFitness(double dt, double (*fitfunction) (double, double, double));
 
-  void print(ostream& out)
-  {
-    for(int i = 0; i<N; i++)
-    {
-      out << path[i].x << "\t" << path[i].y << endl;
-    }
-  }
+  void print(ostream& out);
 
-  Point& operator[](const int index)
-  {
-    return path[index];
-  }
-
+  Point& operator[](const int index);
 };
 
 #endif //_PATH_H
