@@ -60,14 +60,14 @@ void Population::generate(Point ini, Point f, int pathsize)
   double deltat = f.x - ini.x;
   double deltax = f.y - ini.y;
   double dt = deltat/pathsize;
-  int i = 0;
-  while(1)
+  double m = deltax/deltat;
+  /*while(1)
   {
     Path* p = new Path(ini, f, pathsize);
     Point x0 = ini;
     for(int t = 0; t<pathsize-1; t++)
     {
-      double y = (2.0*(((double)rand())/((double)RAND_MAX))-1.0)*deltax*0.1;
+      double y = (2.0*(((double)rand())/((double)RAND_MAX))-1.0)*deltax*0.8;
       Point tmp(ini.x+t*dt, x0.y+y);
       (*p)[t] = tmp;
       x0 = tmp;
@@ -79,11 +79,25 @@ void Population::generate(Point ini, Point f, int pathsize)
     }
     else
     {
+      //p->id = i;
       pop[i] = p;
       i++;
       if(i == dim)
         return;
     }
+  }*/
+  for(int j = 0; j<dim; j++)
+  {
+    Path* p = new Path(ini, f, pathsize);
+    for(int i = 1; i<pathsize-1; i++)
+    {
+      double var = (((double)rand()/(double)RAND_MAX)*2.-1.)*deltax*0.3;
+      Point tmp;
+      tmp.x = ini.x + i*dt;
+      tmp.y = m*tmp.x + var;
+      (*p)[i] = tmp;
+    }
+    pop[j] = p;
   }
 }
 
@@ -100,7 +114,7 @@ void Population::printall()
   system(dirs.str().c_str());
   for(int i = 0; i<dim; i++)
   {
-    fnstream << "iteration_" << id << "/teste_" << i << ".dat";
+    fnstream << "iteration_" << id << "/teste_" << pop[i]->id << ".dat";
     ofstream out(fnstream.str().c_str());
     pop[i]->print(out);
     fnstream.str("");
@@ -111,4 +125,12 @@ void Population::printall()
 void Population::setId(int id)
 {
   this->id = id;
+}
+
+void Population::printAction()
+{
+  for(int i = 0; i<dim; i++)
+  {
+    cout << "PathID = " << pop[i]->id << "; PathAction = " << pop[i]->fitness << endl;
+  }
 }

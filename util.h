@@ -1,6 +1,8 @@
 #ifndef _UTIL_H
 #define _UTIL_H 1
 
+#include <iostream>
+
 struct Point
 {
   double x;
@@ -18,6 +20,7 @@ struct Point
   friend Point operator* (double c, const Point& p);
   friend Point operator+ (const Point& p1, const Point& p2);
   Point operator= (const Point& p1);
+  //friend std::ostream& operator<< (ostream& o, const Point& p);
 };
 
 

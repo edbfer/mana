@@ -1,6 +1,8 @@
 #include "util.h"
 #include "path.h"
 
+using namespace std;
+
 Point operator*(double c, const Point& p)
 {
   Point newP(c*p.x, c*p.y);
@@ -18,3 +20,9 @@ Point Point::operator=(const Point &p1)
   this->x = p1.x;
   this->y = p1.y;
 }
+
+/*ostream& operator<< (ostream& o, const Point& p)
+{
+  o << "x: " << p.x << " y: " << p.y;
+  return o;
+}*/

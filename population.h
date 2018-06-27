@@ -29,6 +29,7 @@ public:
 
   void generate(Point ini, Point f, int pathsize);
   void printall();
+  void printAction();
 
   void setId(int id);
 
