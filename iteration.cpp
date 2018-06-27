@@ -78,6 +78,7 @@ Population* Iteration::iterate(Population *pop, int N_combined, double dh, doubl
   double s=0.;
 
   bubble_sort(pop);
+  pop->printAction();
   //cout << "Iteration::iterate(): max_fitness -> " << max_fitness << endl;
   s = deviation(pop);
   //cout << "Iteration::iterate(): deviation() output -> " << s << endl;

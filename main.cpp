@@ -17,7 +17,7 @@ using namespace std;
 
 double Lagrangian(double x, double xdot, double t)
 {//oscilador harmonico
-  return sqrt(1 + xdot*xdot);
+  return t*t;//sqrt(1 + xdot*xdot);
 }
 
 //ha aqui uma merda muito grande a acontecer
@@ -35,7 +35,7 @@ int main(){
   int nmax = 20;
   int dim = 10;
   double dh = 0.05;
-  double pathsize = 2000;
+  double pathsize = 5000;
 
   unsigned int seed = time(nullptr);
 
@@ -46,7 +46,8 @@ int main(){
   Point ini(0.0, 0.0);
   Point f(10.0, 10.0);
 
-  double dt = (f.x - ini.x)/1500.0;
+  double dt = (f.x - ini.x)/pathsize;
+  cout << "dt: " << dt << endl;
 
   pini.generate(ini, f, pathsize);
   for(int j = 0; j<dim; j++)

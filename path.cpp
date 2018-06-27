@@ -33,18 +33,30 @@ Path::~Path()
 double Path::getFitness(double dt, double (*fitfunction)(double, double, double))
 {
   //this->fitness = integrate(dt, fitfunction, this);
-  double integral = 0., t, x, xdot, x1;
   Path* path = this;
+  double integral = 0., t = (*path)[0].x, x, xdot, x1, x2;
   int N = path->N;
+
+  x = (*path)[0].y;
+  x1 = (*path)[1].y;
+  xdot = (x1 - x)/dt;
+  integral += fitfunction(x, xdot, t)*dt;
 
   for(int i=1; i<N-1; i++)
   {
-    t = (*path)[0].x + i*dt;
-    x = (*path)[i-1].y;
-    x1 = (*path)[i].y;
-    xdot = (x1-x)/dt;
+    t += dt;
+    x1 = (*path)[i-1].y;
+    x = (*path)[i].y;
+    x2 = (*path)[i+1].y;
+    xdot = (x2-x1)/(2.*dt);
     integral = integral + fitfunction(x,xdot,t)*dt;
   }
+
+  t += dt;
+  x = (*path)[N-1].y;
+  x1 = (*path)[N-2].y;
+  xdot = (x - x1)/dt;
+  integral += fitfunction(x, xdot, t)*dt;
 
   this->fitness = integral;
 

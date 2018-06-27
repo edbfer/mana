@@ -91,10 +91,10 @@ void Population::generate(Point ini, Point f, int pathsize)
     Path* p = new Path(ini, f, pathsize);
     for(int i = 1; i<pathsize-1; i++)
     {
-      double var = (((double)rand()/(double)RAND_MAX)*2.-1.)*deltax*0.3;
+      //double var = (((double)rand()/(double)RAND_MAX)*2.-1.)*deltax*0.3;
       Point tmp;
       tmp.x = ini.x + i*dt;
-      tmp.y = m*tmp.x + var;
+      tmp.y = 0.;//m*tmp.x /*+ var*/;
       (*p)[i] = tmp;
     }
     pop[j] = p;
@@ -133,4 +133,5 @@ void Population::printAction()
   {
     cout << "PathID = " << pop[i]->id << "; PathAction = " << pop[i]->fitness << endl;
   }
+  cout << "--" << endl;
 }
